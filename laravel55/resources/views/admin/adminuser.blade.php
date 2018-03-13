@@ -44,6 +44,13 @@
         .table{
             table-layout: fixed;
         }
+        .form-group{
+            margin-bottom:0;
+        }
+        .baocuo{
+            margin:0;
+            height:25px; 
+        }
     </style>
 </head>
 
@@ -125,12 +132,14 @@
 
                                     </div>
                                 </div>
+                                <p class="baocuo"></p>
                                 <div class="form-group" style="clear:both;">
                                     <label class="col-sm-2 control-label">姓名：</label>
                                     <div class="col-sm-10">
                                       <input type="text" class="form-control" placeholder="姓名" name="name" required="required" oninvalid="setCustomValidity('请填写名字')" oninput="setCustomValidity('')">
                                     </div>
                                 </div>
+                              <p class="baocuo"></p>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">性别：</label>
                                     <div class="col-sm-10">
@@ -140,18 +149,21 @@
                                         </select>
                                     </div>
                                 </div>
+                                <p class="baocuo"></p>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">账号：</label>
                                     <div class="col-sm-10">
                                       <input type="text" class="form-control" placeholder="账号" name="username" required="required" oninvalid="setCustomValidity('请填写账号')" oninput="setCustomValidity('')">
                                     </div>
                                 </div>
+                                <p class="baocuo"></p>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">密码：</label>
                                     <div class="col-sm-10">
                                       <input type="text" class="form-control" placeholder="密码" name="password" required="required" oninvalid="setCustomValidity('请填写密码')" oninput="setCustomValidity('')">
                                     </div>
                                 </div>
+                                <p class="baocuo"></p>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">权限：</label>
                                     <div class="col-sm-10">
@@ -161,8 +173,9 @@
                                         </select>
                                     </div>
                                 </div>
+                                <p class="baocuo"></p>
                                 <div>
-                                    <button class="insert btn btn-sm btn-primary pull-right m-t-n-xs" type="button" id="file_id"><strong>添加</strong>
+                                    <button class="insert btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" id="file_id"><strong>添加</strong>
                                     </button>
                                 </div>
                             </form>
