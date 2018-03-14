@@ -38,49 +38,54 @@ class AdminuserController extends Controller
     //执行添加
     public function store(Request $request)
     {
-       // var_dump(111);
-        // $id = $request->id;
-        // //执行图片添加
+        //执行图片添加
         $file = $request->file('imaged');
-       //获取随机名
+
+        //获取随机名
          $newImagesName = mt_rand(1000,99999);
+
          //获取时间戳
          $time = time();
+
          //拼接文件名
          $novel = $newImagesName.$time;
+
          //获取文件的后缀
          $extension = $file->getClientOriginalExtension();
+
          //定义文件目录
         $site = 'uploads/';
+
          //缩放后前缀名
-          $pre="x_";
-          $img = Image::make($file);
-         // var_dump($img);dd();
+        $pre="x_";
+
+        $img = Image::make($file);
+
          //原图保存到指定位置
          $img->save($site.$novel.'.'.$extension);
+
          //执行缩放
          $img->resize(null, 60, function($constraint){       // 阻止可能的尺寸变化(保持图像大小)  
             $constraint->aspectRatio();  
             $constraint->upsize();  
         });
+
         //缩放图保存到指定位置
          $img->save($site. $pre.$novel.'.'.$extension); 
 
         $Adminuser = new Adminuser;
-        // dd($Adminuser);
-        // Imagesx::imageResize($file,$site,$Adminuser);//调用图片方法
+
         //执行数据添加
-         $Adminuser->imaged = $novel.'.'.$extension;
-         $Adminuser->imagex = $pre.$novel.'.'.$extension;
+        $Adminuser->imaged = $novel.'.'.$extension;
+        $Adminuser->imagex = $pre.$novel.'.'.$extension;
         $Adminuser->name = $request->name;
         $Adminuser->sex = $request->sex;
         $Adminuser->username = $request->username;
         $Adminuser->password = $request->password;
         $Adminuser->state = $request->state;
         $Adminuser->save();
-       return "<img src='/uploads/".$pre.$novel.'.'.$extension."'>";//返回数据
-           
-        }
+        return "<img src='/uploads/".$pre.$novel.'.'.$extension."'>";//返回数据      
+    }
         
         
        
@@ -119,69 +124,75 @@ class AdminuserController extends Controller
     public function update(Request $request)
     {
         //修改
+
         //获取修改的图片信息
          $file = $request->file("imaged");
-         // var_dump($file);dd();
+
          $id = $request->id;//id
+
         $Find = Adminuser::find($id);//查询这条信息
+
         //获取随机名
          $newImagesName = mt_rand(1000,99999);
+
          //获取时间戳
          $time = time();
+
          //拼接文件名
          $novel = $newImagesName.$time;
-         //获取文件的后缀
-         $extension = $file->getClientOriginalExtension();
+       
          //定义文件目录
         $site = 'uploads/';
-         //缩放后前缀名
-          $pre="x_";
-         if($file){
-            // var_dump(1);dd();
-            // var_dump(1);dd();
-             // 把原图删掉
-                 $ximage =  $Find->imagex;
-                $dimage =  $Find->imaged;
-                // var_dump($dimage);
-                $one = $site.$ximage;
-                $two= $site.$dimage;
-                 //判断删除图片
-                if(file_exists($two) || file_exists($one)){
-                    unlink($one);
-                    unlink($two);
-                }
-                 // var_dump(1);dd();
-                 $img = Image::make($file);
-                 //原图保存到指定位置
-                 $img->save($site.$novel.'.'.$extension);
-                 //执行缩放
-                 $img->resize(null, 60, function($constraint){       // 阻止可能的尺寸变化(保持图像大小)  
-                    $constraint->aspectRatio();  
-                    $constraint->upsize();  
-                });
-                //缩放图保存到指定位置
-                 $img->save($site. $pre.$novel.'.'.$extension);  
 
-                // //把信息修改
-                $Find->imaged = $novel.'.'.$extension;
-                $Find->imagex = $pre.$novel.'.'.$extension;
-                $Find ->name = $request->name;
-                $Find->sex = $request->sex;
-                $Find->password = $request->password;
-                $Find->state = $request->state;
-                $Find->save();
-                 // var_dump(1);dd();
-                return "<img src='/uploads/".$pre.$novel.'.'.$extension."'>";//返回数据
-         }else{
-            // var_dump(2);dd();
-                $Find->name = $request->name;
-                $Find->sex = $request->sex;
-                $Find->password = $request->password;
-                $Find->state = $request->state;
-                $Find->save();
-                $Fi = Adminuser::find($id);
-                return "<img src='/uploads/$Fi->imagex'>";//返回数据
-         }
+         //缩放后前缀名
+        $pre="x_";
+
+        if($file){
+            //获取文件的后缀
+            $extension = $file->getClientOriginalExtension();
+
+            // 把原图删掉
+            $ximage =  $Find->imagex;
+            $dimage =  $Find->imaged;
+            $one = $site.$ximage;
+            $two= $site.$dimage;
+             //判断删除图片
+            if(file_exists($two) || file_exists($one)){
+                unlink($one);
+                unlink($two);
+            }
+            
+             $img = Image::make($file);
+             //原图保存到指定位置
+             $img->save($site.$novel.'.'.$extension);
+
+             //执行缩放
+             $img->resize(null, 60, function($constraint){       // 阻止可能的尺寸变化(保持图像大小)  
+                $constraint->aspectRatio();  
+                $constraint->upsize();  
+            });
+
+            //缩放图保存到指定位置
+            $img->save($site. $pre.$novel.'.'.$extension);  
+
+            //把信息修改
+            $Find->imaged = $novel.'.'.$extension;
+            $Find->imagex = $pre.$novel.'.'.$extension;
+            $Find ->name = $request->name;
+            $Find->sex = $request->sex;
+            $Find->password = $request->password;
+            $Find->state = $request->state;
+            $Find->save();
+            return "<img src='/uploads/".$pre.$novel.'.'.$extension."'>";//返回数据
+        }else{
+            $Find->name = $request->name;
+            $Find->sex = $request->sex;
+            $Find->password = $request->password;
+            $Find->state = $request->state;
+            $Find->save();
+            $Fi = Adminuser::find($id);
+            return "<img src='/uploads/$Fi->imagex'>";//返回数据
+        }
     }
 
     /**
@@ -193,25 +204,37 @@ class AdminuserController extends Controller
     public function destroy(Request $request)
     {
         //删除
-        $id = $request->id;
-            $tmpArr = explode(',', $id);
-            for($i=0;$i<count($tmpArr);$i++){
-                $Adminuser = Adminuser::find($tmpArr[$i]);
-                $file = "uploads/";
-                $ximage =  $Adminuser->imagex;
-                $dimage =  $Adminuser->imaged;
-                $one = $file.$ximage;
-                $two= $file.$dimage;
-                 $m = Adminuser::destroy($tmpArr[$i]);
-                 if($m){
-                     //判断删除图片
-                    if(file_exists($one)){
-                          unlink($one);
-                    }
-                    if(file_exists($two)){
-                        unlink($two);
-                    }
-                 }
-            }
+        $id = $request->id;//获取id
+
+        $tmpArr = explode(',', $id);//把字符串拆分成数据
+
+        //遍历数据
+        for($i=0;$i<count($tmpArr);$i++){
+            //查询每个id
+            $Adminuser = Adminuser::find($tmpArr[$i]);
+
+            //定义图片路径
+            $file = "uploads/";
+
+            //查询原图片
+            $ximage =  $Adminuser->imagex;
+            $dimage =  $Adminuser->imaged;
+
+            //拼装原图路径
+            $one = $file.$ximage;
+            $two= $file.$dimage;
+
+            //删除数据库每条信息
+            $m = Adminuser::destroy($tmpArr[$i]);
+             if($m){
+                 //判断删除图片
+                if(file_exists($one)){
+                      unlink($one);
+                }
+                if(file_exists($two)){
+                    unlink($two);
+                }
+             }
+        }
     }
 }

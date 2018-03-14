@@ -21,6 +21,9 @@
 	Route::resource('/admin/adminuser', 'Admin\AdminuserController');
 	//banner资源控制器
 	Route::resource('/admin/banner', 'Admin\BannerController');
+	//前台会员控制器
+	Route::any('/admin/user','Admin\UserController@index');
+	Route::any('/admin/user/state/{id}','Admin\UserController@state');//修改状态
 // }); 
 
 

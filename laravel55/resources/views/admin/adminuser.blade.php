@@ -335,7 +335,7 @@
                   title:'修改学生信息',
                   skin: 'layui-layer-rim', //加上边框
                   area: ['640px', '500px'],
-                  content: "<div class='modal-dialog'><div class='modal-body'><div class='row'><div class='col-sm-12'><div class='form-horizontal' data-toggle='table'><div class='form-group'><label class='col-sm-2 control-label'>当前头像：</label><div class='col-sm-10'>"+ob.imagex+"</div></div> <div class='form-group'><label class='col-sm-2 control-label'>修改头像：</label><div class='x1 col-sm-10'><input type='file' name='imaged' id='filee'></div></div><div class='form-group'><label class='col-sm-2 control-label'>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</label><div class='col-sm-10'><input type='text' class='x2 form-control' placeholder='姓名' name='name' value="+ob.name+"></div></div> <div class='form-group'><label class='col-sm-2 control-label'>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label><div class='col-sm-10'><select name='sex' class='form-control'><option value='男'"+eval((ob.sex=='男')?selected:'')+">男</option><option value='女'"+eval((ob.sex=='女')?selected:'')+">女</option></select></div></div> <div class='form-group'><label class='col-sm-2 control-label'>权&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;限：</label><div class='col-sm-10'><select name='state' class='form-control'><option value='超级管理员'"+eval((ob.state=='超级管理员')?selected:'')+">超级管理员</option><option value='普通管理员'"+eval((ob.state=='普通管理员')?selected:'')+">普通管理员</option></select></div></div> <div class='form-group'><label class='col-sm-2 control-label'>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</label><div class='col-sm-10'><input type='text' class='form-control' placeholder=密码' name='password' value="+ob.password+"></div></div><div><button class='updatee btn btn-sm btn-primary pull-right m-t-n-xs' type='button'><strong>执行修改</strong></button></div></div></div></div></div></div>"
+                  content: "<div class='modal-dialog'><div class='modal-body'><div class='row'><div class='col-sm-12'><div class='form-horizontal' data-toggle='table'><div class='form-group'><label class='col-sm-2 control-label'>当前头像：</label><div class='col-sm-10'>"+ob.imagex+"</div></div> <div class='form-group'><label class='col-sm-2 control-label'>修改头像：</label><div class='x1 col-sm-10'><input type='file' name='imaged' id='filee' ></div></div><div class='form-group'><label class='col-sm-2 control-label'>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</label><div class='col-sm-10'><input type='text' class='x2 form-control' placeholder='姓名' name='name' value="+ob.name+"></div></div> <div class='form-group'><label class='col-sm-2 control-label'>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label><div class='col-sm-10'><select name='sex' class='form-control'><option value='男'"+eval((ob.sex=='男')?selected:'')+">男</option><option value='女'"+eval((ob.sex=='女')?selected:'')+">女</option></select></div></div> <div class='form-group'><label class='col-sm-2 control-label'>权&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;限：</label><div class='col-sm-10'><select name='state' class='form-control'><option value='超级管理员'"+eval((ob.state=='超级管理员')?selected:'')+">超级管理员</option><option value='普通管理员'"+eval((ob.state=='普通管理员')?selected:'')+">普通管理员</option></select></div></div> <div class='form-group'><label class='col-sm-2 control-label'>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</label><div class='col-sm-10'><input type='text' class='form-control' placeholder=密码' name='password' value="+ob.password+"></div></div><div><button class='updatee btn btn-sm btn-primary pull-right m-t-n-xs' type='button'><strong>执行修改</strong></button></div></div></div></div></div></div>"
                 });
                 // 执行修改
             $('.updatee').click(function(){
@@ -350,7 +350,7 @@
                 // alert(sex);
                 filee = $(this).parent().parent().children().find("#filee").val();
                 // alert(filee);
-                ssss = document.getElementById("filee").files[0];
+                file = document.getElementById("filee").files[0];
                 // alert(ssss);
                 state = $(this).parent().parent().children().eq(4).find("select").val();
                 // alert(state);
@@ -358,14 +358,14 @@
                 // alert(password);
                 // http://blog.csdn.net/Inuyasha1121/article/details/51915742
                 layer.close(layer.index); 
-                        layer.confirm('你确定要修改吗？', {
+                        layer.confirm('你确定要修改吗？',{
                         btn: ['确定','取消'] 
                       }, function(){
                          formData = new FormData();
                         if(filee){
-                            // alert(file);
+                            alert(1);
                             // 获取图像
-                            formData.append('imaged',ssss);
+                            formData.append('imaged',file);
                             // 插入内容
                             formData.append('id', id);
                             formData.append('name', name);
@@ -380,10 +380,9 @@
                             formData.append('name', name);
                             formData.append('sex', sex);
                             formData.append('state', state);
-                             formData.append("_method","PUT");
-                             formData.append('password', password);
+                            formData.append("_method","PUT");
+                            formData.append('password', password);
                             formData.append("_token","{{ csrf_token() }}");
-                            
                         }
                         $.ajax({
                             url: '/admin/adminuser/update',
@@ -393,14 +392,13 @@
                             processData: false,
                             contentType: false
                         }).done(function(res) {
-                            alert(res);
+                            // alert(res);
                             tr.eq(2).html(res);
                             tr.eq(3).text(sex);
                             tr.eq(4).text(name);
                             tr.eq(6).text(password);
                             tr.eq(7).text(state);
-                            layer.msg('修改成功', {icon: 1});
-                            
+                            layer.msg('修改成功', {icon: 1});   
                         }).fail(function(res) {
                             // alert(2);
                             layer.msg('修改失败', {icon: 2});

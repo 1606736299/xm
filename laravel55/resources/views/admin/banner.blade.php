@@ -203,10 +203,11 @@
                     id[i]=ob[i].id;
                 }
                 var str=id.join(","); //把数组分割成字符串
+
                 layer.confirm('你确定要删除吗？', {
                     btn: ['删除','取消'] 
                   }, function(){
-                    $.post("/admin/adminuser/destroy",{id:str,"_method":"DELETE","_token":"{{ csrf_token() }}"},function(data,status){
+                    $.post("/admin/banner/destroy",{id:str,"_method":"DELETE","_token":"{{ csrf_token() }}"},function(data,status){
                         layer.msg('删除成功', {icon: 1});
                         //删除表格
                         var ids = $.map($('#exampleTableToolbar').bootstrapTable('getSelections'), function (row) {
@@ -250,9 +251,9 @@
                 // alert(name);
                 state = $(this).parent().parent().children().eq(3).find("select").val();
                 // alert(state);
-                file = $(this).parent().parent().children().find("#filee").val();
+                filee = $(this).parent().parent().children().find("#filee").val();
                 // alert(file1);
-                sss = document.getElementById("filee").files[0];
+                fil = document.getElementById("filee").files[0];
                 // alert(sss1);
                 // http://blog.csdn.net/Inuyasha1121/article/details/51915742
                 layer.close(layer.index); 
@@ -263,7 +264,7 @@
                         if(file){
                             alert(1);
                             // 获取图像
-                            formData.append('imaged',sss);
+                            formData.append('imaged',fil);
                             // 插入内容
                             formData.append('id', id);
                             formData.append('name', name);
