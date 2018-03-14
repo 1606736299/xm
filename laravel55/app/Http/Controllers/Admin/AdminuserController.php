@@ -137,6 +137,8 @@ class AdminuserController extends Controller
          //缩放后前缀名
           $pre="x_";
          if($file){
+            // var_dump(1);dd();
+            // var_dump(1);dd();
              // 把原图删掉
                  $ximage =  $Find->imagex;
                 $dimage =  $Find->imaged;
@@ -148,6 +150,7 @@ class AdminuserController extends Controller
                     unlink($one);
                     unlink($two);
                 }
+                 // var_dump(1);dd();
                  $img = Image::make($file);
                  //原图保存到指定位置
                  $img->save($site.$novel.'.'.$extension);
@@ -158,24 +161,26 @@ class AdminuserController extends Controller
                 });
                 //缩放图保存到指定位置
                  $img->save($site. $pre.$novel.'.'.$extension);  
+
                 // //把信息修改
-                 $Find->imaged = $novel.'.'.$extension;
+                $Find->imaged = $novel.'.'.$extension;
                 $Find->imagex = $pre.$novel.'.'.$extension;
                 $Find ->name = $request->name;
                 $Find->sex = $request->sex;
                 $Find->password = $request->password;
                 $Find->state = $request->state;
                 $Find->save();
+                 // var_dump(1);dd();
                 return "<img src='/uploads/".$pre.$novel.'.'.$extension."'>";//返回数据
          }else{
-                $Find ->name = $request->name;
+            // var_dump(2);dd();
+                $Find->name = $request->name;
                 $Find->sex = $request->sex;
                 $Find->password = $request->password;
                 $Find->state = $request->state;
                 $Find->save();
                 $Fi = Adminuser::find($id);
                 return "<img src='/uploads/$Fi->imagex'>";//返回数据
-
          }
     }
 

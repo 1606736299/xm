@@ -44,13 +44,6 @@
         .table{
             table-layout: fixed;
         }
-        .form-group{
-            margin-bottom:0;
-        }
-        .baocuo{
-            margin:0;
-            height:25px; 
-        }
     </style>
 </head>
 
@@ -132,14 +125,12 @@
 
                                     </div>
                                 </div>
-                                <p class="baocuo"></p>
                                 <div class="form-group" style="clear:both;">
                                     <label class="col-sm-2 control-label">姓名：</label>
                                     <div class="col-sm-10">
                                       <input type="text" class="form-control" placeholder="姓名" name="name" required="required" oninvalid="setCustomValidity('请填写名字')" oninput="setCustomValidity('')">
                                     </div>
                                 </div>
-                              <p class="baocuo"></p>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">性别：</label>
                                     <div class="col-sm-10">
@@ -149,21 +140,18 @@
                                         </select>
                                     </div>
                                 </div>
-                                <p class="baocuo"></p>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">账号：</label>
                                     <div class="col-sm-10">
                                       <input type="text" class="form-control" placeholder="账号" name="username" required="required" oninvalid="setCustomValidity('请填写账号')" oninput="setCustomValidity('')">
                                     </div>
                                 </div>
-                                <p class="baocuo"></p>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">密码：</label>
                                     <div class="col-sm-10">
                                       <input type="text" class="form-control" placeholder="密码" name="password" required="required" oninvalid="setCustomValidity('请填写密码')" oninput="setCustomValidity('')">
                                     </div>
                                 </div>
-                                <p class="baocuo"></p>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">权限：</label>
                                     <div class="col-sm-10">
@@ -173,7 +161,6 @@
                                         </select>
                                     </div>
                                 </div>
-                                <p class="baocuo"></p>
                                 <div>
                                     <button class="insert btn btn-sm btn-primary pull-right m-t-n-xs" type="button" id="file_id"><strong>添加</strong>
                                     </button>
@@ -234,17 +221,18 @@
                 // id="modal-form"
                       document.getElementById("modal-form").style.display="none";//弹窗隐藏
                         $('.modal-backdrop').css('background','none');//去除背景颜色
+
                      // alert(1);
                     // 获取添加信息
-                     name = $(this).parent().parent().children().eq(2).find("input").val();
+                     name = $(this).parent().parent().children().eq(1).find("input").val();
                      // alert(name);
-                     sex = $(this).parent().parent().children().eq(4).find("select").val();
+                     sex = $(this).parent().parent().children().eq(2).find("select").val();
                      // alert(sex);
-                     username = $(this).parent().parent().children().eq(6).find("input").val();
+                     username = $(this).parent().parent().children().eq(3).find("input").val();
                      // alert(username);
-                     password = $(this).parent().parent().children().eq(8).find("input").val();
+                     password = $(this).parent().parent().children().eq(4).find("input").val();
                      // alert(password);
-                     state = $(this).parent().parent().children().eq(10).find("select").val();
+                     state = $(this).parent().parent().children().eq(5).find("select").val();
                      // alert(state);
                     //获取表格的元素节点
                     var shopCar = document.getElementById('exampleTableToolbar');
@@ -254,14 +242,11 @@
                     // alert(row[4]);
                     sss = document.getElementById("file").files[0];//获取文件对象
                     //获取ID
-
                     addId = parseInt(row[0].cells[1].innerHTML)+1;
                     // alert(addId);
                     var addShop = shopCar.tBodies[0].insertRow(0);
                     // alert(addShop);
-                    if(addId){
-                        addId = 0;
-                    }
+                    
 
                     layer.close(layer.index); 
                     layer.confirm('你确定要添加？', {
@@ -350,7 +335,7 @@
                   title:'修改学生信息',
                   skin: 'layui-layer-rim', //加上边框
                   area: ['640px', '500px'],
-                  content: "<div class='modal-dialog'><div class='modal-body'><div class='row'><div class='col-sm-12'><div class='form-horizontal' data-toggle='table'><div class='form-group'><label class='col-sm-2 control-label'>当前头像：</label><div class='col-sm-10'>"+ob.imagex+"</div></div> <div class='form-group'><label class='col-sm-2 control-label'>修改头像：</label><div class='x1 col-sm-10'><input type='file' name='imaged' id='file'></div></div><div class='form-group'><label class='col-sm-2 control-label'>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</label><div class='col-sm-10'><input type='text' class='x2 form-control' placeholder='姓名' name='name' value="+ob.name+"></div></div> <div class='form-group'><label class='col-sm-2 control-label'>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label><div class='col-sm-10'><select name='sex' class='form-control'><option value='男'"+eval((ob.sex=='男')?selected:'')+">男</option><option value='女'"+eval((ob.sex=='女')?selected:'')+">女</option></select></div></div> <div class='form-group'><label class='col-sm-2 control-label'>权&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;限：</label><div class='col-sm-10'><select name='state' class='form-control'><option value='超级管理员'"+eval((ob.state=='超级管理员')?selected:'')+">超级管理员</option><option value='普通管理员'"+eval((ob.state=='普通管理员')?selected:'')+">普通管理员</option></select></div></div> <div class='form-group'><label class='col-sm-2 control-label'>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</label><div class='col-sm-10'><input type='text' class='form-control' placeholder=密码' name='password' value="+ob.password+"></div></div><div><button class='updatee btn btn-sm btn-primary pull-right m-t-n-xs' type='button'><strong>执行修改</strong></button></div></div></div></div></div></div>"
+                  content: "<div class='modal-dialog'><div class='modal-body'><div class='row'><div class='col-sm-12'><div class='form-horizontal' data-toggle='table'><div class='form-group'><label class='col-sm-2 control-label'>当前头像：</label><div class='col-sm-10'>"+ob.imagex+"</div></div> <div class='form-group'><label class='col-sm-2 control-label'>修改头像：</label><div class='x1 col-sm-10'><input type='file' name='imaged' id='filee'></div></div><div class='form-group'><label class='col-sm-2 control-label'>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</label><div class='col-sm-10'><input type='text' class='x2 form-control' placeholder='姓名' name='name' value="+ob.name+"></div></div> <div class='form-group'><label class='col-sm-2 control-label'>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label><div class='col-sm-10'><select name='sex' class='form-control'><option value='男'"+eval((ob.sex=='男')?selected:'')+">男</option><option value='女'"+eval((ob.sex=='女')?selected:'')+">女</option></select></div></div> <div class='form-group'><label class='col-sm-2 control-label'>权&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;限：</label><div class='col-sm-10'><select name='state' class='form-control'><option value='超级管理员'"+eval((ob.state=='超级管理员')?selected:'')+">超级管理员</option><option value='普通管理员'"+eval((ob.state=='普通管理员')?selected:'')+">普通管理员</option></select></div></div> <div class='form-group'><label class='col-sm-2 control-label'>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</label><div class='col-sm-10'><input type='text' class='form-control' placeholder=密码' name='password' value="+ob.password+"></div></div><div><button class='updatee btn btn-sm btn-primary pull-right m-t-n-xs' type='button'><strong>执行修改</strong></button></div></div></div></div></div></div>"
                 });
                 // 执行修改
             $('.updatee').click(function(){
@@ -363,10 +348,10 @@
                 // alert(name);
                 sex = $(this).parent().parent().children().eq(3).find("select").val();
                 // alert(sex);
-                file = $(this).parent().parent().children().find("#file").val();
-                // alert(file);
-                sss = document.getElementById("file").files[0];
-                // alert(file)
+                filee = $(this).parent().parent().children().find("#filee").val();
+                // alert(filee);
+                ssss = document.getElementById("filee").files[0];
+                // alert(ssss);
                 state = $(this).parent().parent().children().eq(4).find("select").val();
                 // alert(state);
                 password = $(this).parent().parent().children().eq(5).find("input").val();
@@ -377,10 +362,10 @@
                         btn: ['确定','取消'] 
                       }, function(){
                          formData = new FormData();
-                        if(file){
+                        if(filee){
                             // alert(file);
                             // 获取图像
-                            formData.append('imaged',sss);
+                            formData.append('imaged',ssss);
                             // 插入内容
                             formData.append('id', id);
                             formData.append('name', name);

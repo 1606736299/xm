@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Banner extends Model
 {
-    //修改名字
+    //修改库名
     protected $table = 'banner';
+
 }
 
