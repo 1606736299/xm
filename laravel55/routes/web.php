@@ -19,11 +19,108 @@
 
 	//后台会员管理资源控制器
 	Route::resource('/admin/adminuser', 'Admin\AdminuserController');
+	//banner资源控制器
+	Route::resource('/admin/banner', 'Admin\BannerController');
 // }); 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// -----------------首页------------------//
 //用户模块
 //注册页面
 Route::get('/register', 'Home\RegisterController@index');

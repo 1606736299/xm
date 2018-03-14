@@ -74,17 +74,15 @@
                                             <a class="btn btn-outline btn-default glyphicon glyphicon-pencil edit">修改</a>
                                             <a data-toggle="modal" class="btn btn-outline btn-default glyphicon glyphicon-remove delete">删除</a>
                                     </div>
+                                    {{$id}}
                                     <table data-toggle="table" class="layui-form" id="exampleTableToolbar">
                                         <thead >
                                             <tr  align="center">
                                                 <th data-field="check" data-width="30px" data-checkbox="true"></th>
                                                 <th data-field="id">id</th>
-                                                <th data-field="imagex">头像</th>
-                                                <th data-field="sex">性别</th>
-                                                <th data-field="name">姓名</th>
-                                                <th data-field="username">账号</th>
-                                                <th data-field="password">密码</th>
-                                                <th data-field="state">权限</th>
+                                                <th data-field="imagex">图片</th>
+                                                <th data-field="updated_at">加入时间</th>
+                                                <th data-field="state">状态</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -93,13 +91,13 @@
                                                     <td></td>
                                                     <td>{{$v->id}}</td>
                                                     <td><img src="/uploads/{{$v->imagex}}"></td>
-                                                    <td>{{$v->sex}}</td>
-                                                    <td>{{$v->name}}</td>
-                                                    <td>{{$v->username}}</td>
-                                                    <td>{{$v->password}}</td>
-                                                    <td>{{$v->state}}</td>
+                                                    <td>{{$v->updated_at}}</td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-warning btn-sm">启用</a>
+                                                    </td>
                                                 </tr>
                                             @endforeach
+                                            <!-- {{$stu}} -->
                                         </tbody> 
                                     </table>
                                  </div>
@@ -122,10 +120,10 @@
                             <h3 class="m-t-none m-b">添加学生</h3><hr>
                             <form class="form-horizontal">
                                 <div class="form-group" style="clear:both;">
-                                    <label class="col-sm-2 control-label">头像：</label>
+                                    <label class="col-sm-2 control-label">图片：</label>
                                     <div class="col-sm-10">
                                         <a href="javascript:;" class="upload">选择图片
-                                            <input type="file" name="imaged" class="change" required="required" oninvalid="setCustomValidity('请上传图片')"  multiple="multiple" id="file">
+                                            <input type="file" name="imaged" class="change" id="file">
                                         </a>
                                         <div class="fileerrorTip1" style="display:inline-block; "></div>
                                         <div class="showFileName1" style="display:inline-block;"></div>
@@ -134,13 +132,13 @@
                                 </div>
                                 <p class="baocuo"></p>
                                 <div class="form-group" style="clear:both;">
-                                    <label class="col-sm-2 control-label">姓名：</label>
+                                    <label class="col-sm-2 control-label">图片名：</label>
                                     <div class="col-sm-10">
-                                      <input type="text" class="form-control" placeholder="姓名" name="name" required="required" oninvalid="setCustomValidity('请填写名字')" oninput="setCustomValidity('')">
+                                      <input type="text" class="form-control" placeholder="图片名" name="name">
                                     </div>
                                 </div>
                               <p class="baocuo"></p>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label class="col-sm-2 control-label">性别：</label>
                                     <div class="col-sm-10">
                                         <select name="sex" class="form-control">
@@ -173,7 +171,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <p class="baocuo"></p>
+                                <p class="baocuo"></p> -->
                                 <div>
                                     <button class="insert btn btn-sm btn-primary pull-right m-t-n-xs" type="button" id="file_id"><strong>添加</strong>
                                     </button>
@@ -236,15 +234,15 @@
                         $('.modal-backdrop').css('background','none');//去除背景颜色
                      // alert(1);
                     // 获取添加信息
-                     name = $(this).parent().parent().children().eq(2).find("input").val();
+                     name = $(this).parent().parent().children().eq(1).find("input").val();
                      // alert(name);
-                     sex = $(this).parent().parent().children().eq(4).find("select").val();
+                     sex = $(this).parent().parent().children().eq(2).find("select").val();
                      // alert(sex);
-                     username = $(this).parent().parent().children().eq(6).find("input").val();
+                     username = $(this).parent().parent().children().eq(3).find("input").val();
                      // alert(username);
-                     password = $(this).parent().parent().children().eq(8).find("input").val();
+                     password = $(this).parent().parent().children().eq(4).find("input").val();
                      // alert(password);
-                     state = $(this).parent().parent().children().eq(10).find("select").val();
+                     state = $(this).parent().parent().children().eq(5).find("select").val();
                      // alert(state);
                     //获取表格的元素节点
                     var shopCar = document.getElementById('exampleTableToolbar');
@@ -254,14 +252,11 @@
                     // alert(row[4]);
                     sss = document.getElementById("file").files[0];//获取文件对象
                     //获取ID
-
                     addId = parseInt(row[0].cells[1].innerHTML)+1;
                     // alert(addId);
                     var addShop = shopCar.tBodies[0].insertRow(0);
                     // alert(addShop);
-                    if(addId){
-                        addId = 0;
-                    }
+                    
 
                     layer.close(layer.index); 
                     layer.confirm('你确定要添加？', {

@@ -5,9 +5,6 @@ use App\AdminModel\Adminuser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Image;
-use Illuminate\Support\Facades\Storage;
-// use App\Http\Controllers\Admin\Imagesx;
-
 class AdminuserController extends Controller
 {
     /**

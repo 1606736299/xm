@@ -63,7 +63,7 @@
                         </a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a class="J_menuItem" href="index_v1.html" data-index="0">主页示例一</a>
+                                <a class="J_menuItem" href="/admin/banner" data-index="0">banner</a>
                             </li>
                             <li>
                                 <a class="J_menuItem" href="index_v2.html">主页示例二</a>
