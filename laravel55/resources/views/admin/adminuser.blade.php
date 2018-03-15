@@ -36,6 +36,7 @@
             opacity:0;
         }
         .table th, .table td{ 
+        overflow: hidden 
         height:100px;
         width:100px;
         text-align: center;
@@ -76,7 +77,6 @@
                                                 <th data-field="sex">性别</th>
                                                 <th data-field="name">姓名</th>
                                                 <th data-field="username">账号</th>
-                                                <th data-field="password">密码</th>
                                                 <th data-field="state">权限</th>
                                             </tr>
                                         </thead>
@@ -89,7 +89,6 @@
                                                     <td>{{$v->sex}}</td>
                                                     <td>{{$v->name}}</td>
                                                     <td>{{$v->username}}</td>
-                                                    <td>{{$v->password}}</td>
                                                     <td>{{$v->state}}</td>
                                                 </tr>
                                             @endforeach
@@ -113,7 +112,8 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <h3 class="m-t-none m-b">添加学生</h3><hr>
-                            <form class="form-horizontal">
+                            <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                                {{ csrf_field() }}
                                 <div class="form-group" style="clear:both;">
                                     <label class="col-sm-2 control-label">头像：</label>
                                     <div class="col-sm-10">
@@ -149,7 +149,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">密码：</label>
                                     <div class="col-sm-10">
-                                      <input type="text" class="form-control" placeholder="密码" name="password" required="required" oninvalid="setCustomValidity('请填写密码')" oninput="setCustomValidity('')">
+                                      <input type="password" class="form-control" placeholder="密码" name="password" required="required" oninvalid="setCustomValidity('请填写密码')" oninput="setCustomValidity('')">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -162,7 +162,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <button class="insert btn btn-sm btn-primary pull-right m-t-n-xs" type="button" id="file_id"><strong>添加</strong>
+                                    <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" id="file_id"><strong>添加</strong>
                                     </button>
                                 </div>
                             </form>
@@ -202,7 +202,7 @@
             });
 
             //显示文件信息
-
+            
             $(".upload").on("change","input[type='file']",function(){
                 var filePath=$(this).val();
                 if(filePath.indexOf("jpg")!=-1 || filePath.indexOf("png")!=-1 || filePath.indexOf("gif")!=-1){
@@ -217,82 +217,82 @@
                 }
             })
             //添加学生
-            $('.insert').click(function(){
-                // id="modal-form"
-                      document.getElementById("modal-form").style.display="none";//弹窗隐藏
-                        $('.modal-backdrop').css('background','none');//去除背景颜色
+            // $('.insert').click(function(){
+            //     // id="modal-form"
+            //           document.getElementById("modal-form").style.display="none";//弹窗隐藏
+            //             $('.modal-backdrop').css('background','none');//去除背景颜色
 
-                     // alert(1);
-                    // 获取添加信息
-                     name = $(this).parent().parent().children().eq(1).find("input").val();
-                     // alert(name);
-                     sex = $(this).parent().parent().children().eq(2).find("select").val();
-                     // alert(sex);
-                     username = $(this).parent().parent().children().eq(3).find("input").val();
-                     // alert(username);
-                     password = $(this).parent().parent().children().eq(4).find("input").val();
-                     // alert(password);
-                     state = $(this).parent().parent().children().eq(5).find("select").val();
-                     // alert(state);
-                    //获取表格的元素节点
-                    var shopCar = document.getElementById('exampleTableToolbar');
-                    // alert(shopCar);
-                    //获取tbody里面所有的行数
-                    var row = shopCar.tBodies[0].rows;
-                    // alert(row[4]);
-                    sss = document.getElementById("file").files[0];//获取文件对象
-                    //获取ID
-                    addId = parseInt(row[0].cells[1].innerHTML)+1;
-                    // alert(addId);
-                    var addShop = shopCar.tBodies[0].insertRow(0);
-                    // alert(addShop);
+            //          // alert(1);
+            //         // 获取添加信息
+            //          name = $(this).parent().parent().children().eq(1).find("input").val();
+            //          // alert(name);
+            //          sex = $(this).parent().parent().children().eq(2).find("select").val();
+            //          // alert(sex);
+            //          username = $(this).parent().parent().children().eq(3).find("input").val();
+            //          // alert(username);
+            //          password = $(this).parent().parent().children().eq(4).find("input").val();
+            //          // alert(password);
+            //          state = $(this).parent().parent().children().eq(5).find("select").val();
+            //          // alert(state);
+            //         //获取表格的元素节点
+            //         var shopCar = document.getElementById('exampleTableToolbar');
+            //         // alert(shopCar);
+            //         //获取tbody里面所有的行数
+            //         var row = shopCar.tBodies[0].rows;
+            //         // alert(row[4]);
+            //         sss = document.getElementById("file").files[0];//获取文件对象
+            //         //获取ID
+            //         addId = parseInt(row[0].cells[1].innerHTML)+1;
+            //         // alert(addId);
+            //         var addShop = shopCar.tBodies[0].insertRow(0);
+            //         // alert(addShop);
                     
 
-                    layer.close(layer.index); 
-                    layer.confirm('你确定要添加？', {
-                        btn: ['确定','取消'] 
-                      }, function(){
-                        // alert(1);
-                        formData = new FormData();
-                        // alert(file);
-                        // 获取图像
-                        formData.append('imaged',sss);
-                        // 插入内容
-                        formData.append('id', addId);
-                        formData.append('name', name);
-                        formData.append('sex', sex);
-                        formData.append('state', state);
-                        formData.append('username',username);
-                        formData.append('password', password);
-                        formData.append("_token","{{ csrf_token() }}");
-                    $.ajax({
-                        url: '',
-                        type: 'POST',
-                        cache: false,
-                        data:formData,
-                        processData: false,
-                        contentType: false
-                    }).done(function(res) {
-                        // alert(res);
-                        //添加选中按钮
-                    addShop.insertCell(0).innerHTML = "<td class='bs-checkbox'><input data-index='0' name='btSelectItem' type='checkbox'></td>";
-                    addShop.insertCell(1).innerHTML = addId;//id
-                    addShop.insertCell(2).innerHTML =res;//图片
-                    addShop.insertCell(3).innerHTML = sex;//性别
-                    addShop.insertCell(4).innerHTML = name;//姓名
-                    addShop.insertCell(5).innerHTML = username;//账号
-                    addShop.insertCell(6).innerHTML = password;//密码
-                    addShop.insertCell(7).innerHTML = state;//权限
-                    layer.msg('添加成功', {icon: 1});
+            //         layer.close(layer.index); 
+            //         layer.confirm('你确定要添加？', {
+            //             btn: ['确定','取消'] 
+            //           }, function(){
+            //             // alert(1);
+            //             formData = new FormData();
+            //             // alert(file);
+            //             // 获取图像
+            //             formData.append('imaged',sss);
+            //             // 插入内容
+            //             formData.append('id', addId);
+            //             formData.append('name', name);
+            //             formData.append('sex', sex);
+            //             formData.append('state', state);
+            //             formData.append('username',username);
+            //             formData.append('password', password);
+            //             formData.append("_token","{{ csrf_token() }}");
+            //         $.ajax({
+            //             url: '',
+            //             type: 'POST',
+            //             cache: false,
+            //             data:formData,
+            //             processData: false,
+            //             contentType: false
+            //         }).done(function(res) {
+            //             // alert(res);
+            //             //添加选中按钮
+            //         addShop.insertCell(0).innerHTML = "<td class='bs-checkbox'><input data-index='0' name='btSelectItem' type='checkbox'></td>";
+            //         addShop.insertCell(1).innerHTML = addId;//id
+            //         addShop.insertCell(2).innerHTML =res;//图片
+            //         addShop.insertCell(3).innerHTML = sex;//性别
+            //         addShop.insertCell(4).innerHTML = name;//姓名
+            //         addShop.insertCell(5).innerHTML = username;//账号
+            //         addShop.insertCell(6).innerHTML = password;//密码
+            //         addShop.insertCell(7).innerHTML = state;//权限
+            //         layer.msg('添加成功', {icon: 1});
                         
-                    }).fail(function(res) {
-                        // alert(2);
-                        layer.msg('添加失败', {icon: 2});
-                    });
-                   }, function(){
-                        layer.msg('已取消', {icon: 2});
-                      });  
-            });
+            //         }).fail(function(res) {
+            //             // alert(2);
+            //             layer.msg('添加失败', {icon: 2});
+            //         });
+            //        }, function(){
+            //             layer.msg('已取消', {icon: 2});
+            //           });  
+            // });
             //删除学生
             $('.delete').click(function(){
                 var ob = $('#exampleTableToolbar').bootstrapTable('getSelections');
@@ -323,19 +323,25 @@
 
             //修改学生
             $('.edit').click(function(){
+
                 selected = 'selected';
                  cks = document.querySelectorAll("input[name='btSelectItem']:checked");
+                 // alert(cks);
                 if (cks.length==1) {
                     $('input[name="btSelectItem"]:checked').each(function(){ 
                         ob = $('#exampleTableToolbar').bootstrapTable('getSelections')[0];
                     });
+                    // qewr = document.getElementsByName('111')[0].getAttribute('value');
+                    // alert(qewr);
+                    // idd = document.getElementById("mima");
+                    // alert(ob.password);
                 //页面层
             var index = layer.open({
                   type: 1,
                   title:'修改学生信息',
                   skin: 'layui-layer-rim', //加上边框
                   area: ['640px', '500px'],
-                  content: "<div class='modal-dialog'><div class='modal-body'><div class='row'><div class='col-sm-12'><div class='form-horizontal' data-toggle='table'><div class='form-group'><label class='col-sm-2 control-label'>当前头像：</label><div class='col-sm-10'>"+ob.imagex+"</div></div> <div class='form-group'><label class='col-sm-2 control-label'>修改头像：</label><div class='x1 col-sm-10'><input type='file' name='imaged' id='filee' ></div></div><div class='form-group'><label class='col-sm-2 control-label'>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</label><div class='col-sm-10'><input type='text' class='x2 form-control' placeholder='姓名' name='name' value="+ob.name+"></div></div> <div class='form-group'><label class='col-sm-2 control-label'>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label><div class='col-sm-10'><select name='sex' class='form-control'><option value='男'"+eval((ob.sex=='男')?selected:'')+">男</option><option value='女'"+eval((ob.sex=='女')?selected:'')+">女</option></select></div></div> <div class='form-group'><label class='col-sm-2 control-label'>权&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;限：</label><div class='col-sm-10'><select name='state' class='form-control'><option value='超级管理员'"+eval((ob.state=='超级管理员')?selected:'')+">超级管理员</option><option value='普通管理员'"+eval((ob.state=='普通管理员')?selected:'')+">普通管理员</option></select></div></div> <div class='form-group'><label class='col-sm-2 control-label'>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</label><div class='col-sm-10'><input type='text' class='form-control' placeholder=密码' name='password' value="+ob.password+"></div></div><div><button class='updatee btn btn-sm btn-primary pull-right m-t-n-xs' type='button'><strong>执行修改</strong></button></div></div></div></div></div></div>"
+                  content: "<div class='modal-dialog'><div class='modal-body'><div class='row'><div class='col-sm-12'><div class='form-horizontal' data-toggle='table'><div class='form-group'><label class='col-sm-2 control-label'>当前头像：</label><div class='col-sm-10'>"+ob.imagex+"</div></div> <div class='form-group'><label class='col-sm-2 control-label'>修改头像：</label><div class='x1 col-sm-10'><input type='file' name='imaged' id='filee' ></div></div><div class='form-group'><label class='col-sm-2 control-label'>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</label><div class='col-sm-10'><input type='text' class='x2 form-control' placeholder='姓名' name='name' value="+ob.name+"></div></div> <div class='form-group'><label class='col-sm-2 control-label'>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label><div class='col-sm-10'><select name='sex' class='form-control'><option value='男'"+eval((ob.sex=='男')?selected:'')+">男</option><option value='女'"+eval((ob.sex=='女')?selected:'')+">女</option></select></div></div> <div class='form-group'><label class='col-sm-2 control-label'>权&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;限：</label><div class='col-sm-10'><select name='state' class='form-control'><option value='超级管理员'"+eval((ob.state=='超级管理员')?selected:'')+">超级管理员</option><option value='普通管理员'"+eval((ob.state=='普通管理员')?selected:'')+">普通管理员</option></select></div></div><div><button class='updatee btn btn-sm btn-primary pull-right m-t-n-xs' type='button'><strong>执行修改</strong></button></div></div></div></div></div></div>"
                 });
                 // 执行修改
             $('.updatee').click(function(){
@@ -353,8 +359,6 @@
                 file = document.getElementById("filee").files[0];
                 // alert(ssss);
                 state = $(this).parent().parent().children().eq(4).find("select").val();
-                // alert(state);
-                password = $(this).parent().parent().children().eq(5).find("input").val();
                 // alert(password);
                 // http://blog.csdn.net/Inuyasha1121/article/details/51915742
                 layer.close(layer.index); 
@@ -371,7 +375,6 @@
                             formData.append('name', name);
                             formData.append('sex', sex);
                             formData.append('state', state);
-                            formData.append('password', password);
                             formData.append("_method","PUT");
                             formData.append("_token","{{ csrf_token() }}");
                         }else{
@@ -381,7 +384,6 @@
                             formData.append('sex', sex);
                             formData.append('state', state);
                             formData.append("_method","PUT");
-                            formData.append('password', password);
                             formData.append("_token","{{ csrf_token() }}");
                         }
                         $.ajax({
@@ -396,8 +398,7 @@
                             tr.eq(2).html(res);
                             tr.eq(3).text(sex);
                             tr.eq(4).text(name);
-                            tr.eq(6).text(password);
-                            tr.eq(7).text(state);
+                            tr.eq(6).text(state);
                             layer.msg('修改成功', {icon: 1});   
                         }).fail(function(res) {
                             // alert(2);

@@ -5,6 +5,7 @@ use App\AdminModel\Adminuser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Image;
+use Illuminate\Support\Facades\Hash;
 class AdminuserController extends Controller
 {
     /**
@@ -12,11 +13,12 @@ class AdminuserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         $stu = Adminuser::orderBy('id', 'desc')->get();
         return view('admin.adminuser', ['stu' => $stu]);
+       
     }
 
     /**
@@ -73,18 +75,23 @@ class AdminuserController extends Controller
         //缩放图保存到指定位置
          $img->save($site. $pre.$novel.'.'.$extension); 
 
+         $password = Hash::make($request->password);
+
         $Adminuser = new Adminuser;
 
         //执行数据添加
+        
         $Adminuser->imaged = $novel.'.'.$extension;
         $Adminuser->imagex = $pre.$novel.'.'.$extension;
         $Adminuser->name = $request->name;
         $Adminuser->sex = $request->sex;
         $Adminuser->username = $request->username;
-        $Adminuser->password = $request->password;
+      
+        $Adminuser->password = $password;
         $Adminuser->state = $request->state;
         $Adminuser->save();
-        return "<img src='/uploads/".$pre.$novel.'.'.$extension."'>";//返回数据      
+
+        return redirect()->action('Admin\AdminuserController@index');     
     }
         
         
@@ -98,9 +105,12 @@ class AdminuserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
         //
+       $ste =  Adminuser::find($request->id);
+       return $ste->password;
+       
     }
 
     /**
@@ -180,14 +190,12 @@ class AdminuserController extends Controller
             $Find->imagex = $pre.$novel.'.'.$extension;
             $Find ->name = $request->name;
             $Find->sex = $request->sex;
-            $Find->password = $request->password;
             $Find->state = $request->state;
             $Find->save();
             return "<img src='/uploads/".$pre.$novel.'.'.$extension."'>";//返回数据
         }else{
             $Find->name = $request->name;
             $Find->sex = $request->sex;
-            $Find->password = $request->password;
             $Find->state = $request->state;
             $Find->save();
             $Fi = Adminuser::find($id);
