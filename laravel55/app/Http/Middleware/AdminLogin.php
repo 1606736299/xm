@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class AdminLogin
+class Adminlogin
 {
     /**
      * The URIs that should be excluded from CSRF verification.
@@ -14,8 +14,9 @@ class AdminLogin
     public function handle($require,Closure $next)
     {
     	if(!session('key')) {
-    		return response()->view('admin.login');
+    		return response()->view('admin/login');
     	}
-    	return $next($request);
+        // echo 1;
+    	return $next($require);
     }
 }

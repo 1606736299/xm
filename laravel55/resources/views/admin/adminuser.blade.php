@@ -216,83 +216,7 @@
                     return false
                 }
             })
-            //添加学生
-            // $('.insert').click(function(){
-            //     // id="modal-form"
-            //           document.getElementById("modal-form").style.display="none";//弹窗隐藏
-            //             $('.modal-backdrop').css('background','none');//去除背景颜色
-
-            //          // alert(1);
-            //         // 获取添加信息
-            //          name = $(this).parent().parent().children().eq(1).find("input").val();
-            //          // alert(name);
-            //          sex = $(this).parent().parent().children().eq(2).find("select").val();
-            //          // alert(sex);
-            //          username = $(this).parent().parent().children().eq(3).find("input").val();
-            //          // alert(username);
-            //          password = $(this).parent().parent().children().eq(4).find("input").val();
-            //          // alert(password);
-            //          state = $(this).parent().parent().children().eq(5).find("select").val();
-            //          // alert(state);
-            //         //获取表格的元素节点
-            //         var shopCar = document.getElementById('exampleTableToolbar');
-            //         // alert(shopCar);
-            //         //获取tbody里面所有的行数
-            //         var row = shopCar.tBodies[0].rows;
-            //         // alert(row[4]);
-            //         sss = document.getElementById("file").files[0];//获取文件对象
-            //         //获取ID
-            //         addId = parseInt(row[0].cells[1].innerHTML)+1;
-            //         // alert(addId);
-            //         var addShop = shopCar.tBodies[0].insertRow(0);
-            //         // alert(addShop);
-                    
-
-            //         layer.close(layer.index); 
-            //         layer.confirm('你确定要添加？', {
-            //             btn: ['确定','取消'] 
-            //           }, function(){
-            //             // alert(1);
-            //             formData = new FormData();
-            //             // alert(file);
-            //             // 获取图像
-            //             formData.append('imaged',sss);
-            //             // 插入内容
-            //             formData.append('id', addId);
-            //             formData.append('name', name);
-            //             formData.append('sex', sex);
-            //             formData.append('state', state);
-            //             formData.append('username',username);
-            //             formData.append('password', password);
-            //             formData.append("_token","{{ csrf_token() }}");
-            //         $.ajax({
-            //             url: '',
-            //             type: 'POST',
-            //             cache: false,
-            //             data:formData,
-            //             processData: false,
-            //             contentType: false
-            //         }).done(function(res) {
-            //             // alert(res);
-            //             //添加选中按钮
-            //         addShop.insertCell(0).innerHTML = "<td class='bs-checkbox'><input data-index='0' name='btSelectItem' type='checkbox'></td>";
-            //         addShop.insertCell(1).innerHTML = addId;//id
-            //         addShop.insertCell(2).innerHTML =res;//图片
-            //         addShop.insertCell(3).innerHTML = sex;//性别
-            //         addShop.insertCell(4).innerHTML = name;//姓名
-            //         addShop.insertCell(5).innerHTML = username;//账号
-            //         addShop.insertCell(6).innerHTML = password;//密码
-            //         addShop.insertCell(7).innerHTML = state;//权限
-            //         layer.msg('添加成功', {icon: 1});
-                        
-            //         }).fail(function(res) {
-            //             // alert(2);
-            //             layer.msg('添加失败', {icon: 2});
-            //         });
-            //        }, function(){
-            //             layer.msg('已取消', {icon: 2});
-            //           });  
-            // });
+    
             //删除学生
             $('.delete').click(function(){
                 var ob = $('#exampleTableToolbar').bootstrapTable('getSelections');
@@ -407,7 +331,6 @@
                       }, function(){
                         layer.msg('已取消',{icon: 2});
                       });
-
                 });
             }else{
                 parent.layer.msg('请选择一个进行修改');

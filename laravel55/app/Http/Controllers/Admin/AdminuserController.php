@@ -75,7 +75,7 @@ class AdminuserController extends Controller
         //缩放图保存到指定位置
          $img->save($site. $pre.$novel.'.'.$extension); 
 
-         $password = Hash::make($request->password);
+        $password = md5($request->password);
 
         $Adminuser = new Adminuser;
 
@@ -86,7 +86,6 @@ class AdminuserController extends Controller
         $Adminuser->name = $request->name;
         $Adminuser->sex = $request->sex;
         $Adminuser->username = $request->username;
-      
         $Adminuser->password = $password;
         $Adminuser->state = $request->state;
         $Adminuser->save();
