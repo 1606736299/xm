@@ -14,12 +14,18 @@
 //登陆页面
 Route::get('/admin', function () {
 	return view('admin.login');
-});
+})->name('login');
 Route::post('/admin/login','Admin\LoginController@index');
 
 Route::group(['middleware' => 'adminlogin'],function(){
 	//后台首页
 	Route::any('/admin/index','Admin\IndexController@index');
+	//后台会员加载修改页面
+	Route::any('/admin/index/edit/{id}','Admin\IndexController@edit');
+	//后台会员执行修改
+	Route::any('/admin/index/update','Admin\IndexController@update');
+	//执行退处
+	Route::any('/admin/index/exit','Admin\IndexController@exit');
 	//后台会员管理资源控制器
 	Route::resource('/admin/adminuser', 'Admin\AdminuserController');
 	//banner资源控制器

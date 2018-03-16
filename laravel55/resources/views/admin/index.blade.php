@@ -19,36 +19,63 @@
     <link href="/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
     <link href="/css/animate.css" rel="stylesheet">
     <link href="/css/style.css?v=4.1.0" rel="stylesheet">
+    <style type="text/css">
+        .upload{
+            padding: 4px 10px 4px 17px;
+            height: 20px;
+            line-height: 20px;
+            position: relative;
+            border: 1px solid #999;
+            text-decoration: none;
+            color: #333;
+            background:#fff;
+        }
+        .change{
+            position: absolute;
+            overflow: hidden;
+            left:15px;
+            top: 0;
+            opacity:0;
+        }
+        .table th, .table td{ 
+        overflow: hidden 
+        height:100px;
+        width:100px;
+        text-align: center;
+        vertical-align: middle!important;
+        }
+        .table{
+            table-layout: fixed;
+        }
+    </style>
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
     <div id="wrapper">
         <!--左侧导航开始-->
+        @foreach ($ccc as $v)
         <nav class="navbar-default navbar-static-side" role="navigation">
             <div class="nav-close"><i class="fa fa-times-circle"></i>
             </div>
             <div class="sidebar-collapse">
                 <ul class="nav" id="side-menu">
                     <li class="nav-header">
+
                         <div class="dropdown profile-element">
-                            <span><img alt="image" class="img-circle" src="/img/profile_small.jpg" /></span>
+                          
+                            <span><img alt="image" class="img-circle" src="/uploads/{{$v->imagex}}" /></span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
-                               <span class="block m-t-xs"><strong class="font-bold">Beaut-zihan</strong></span>
-                                <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
+                               <span class="block m-t-xs"><strong class="font-bold">{{$v->username}}</strong></span>
+                                <span class="text-muted text-xs block">{{$v->state}}<b class="caret"></b></span>
                                 </span>
                             </a>
+                           
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li><a class="J_menuItem" href="form_avatar.html">修改头像</a>
-                                </li>
-                                <li><a class="J_menuItem" href="profile.html">个人资料</a>
-                                </li>
-                                <li><a class="J_menuItem" href="contacts.html">联系我们</a>
-                                </li>
-                                <li><a class="J_menuItem" href="mailbox.html">信箱</a>
+                                <li><a data-toggle="modal" href="form_basic.html#modal-form">修改</a>
                                 </li>
                                 <li class="divider"></li>
-                                <li><a href="login.html">安全退出</a>
+                                <li><a href="/admin/index/exit">安全退出</a>
                                 </li>
                             </ul>
                         </div>
@@ -342,6 +369,67 @@
             </div>
         </nav>
         <!--左侧导航结束-->
+        <!-- 添加            -->
+        <div id="modal-form" class="modal fade" aria-hidden="true">
+            <div class="modal-dialog"  style="width:800px; ">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h3 class="m-t-none m-b">添加学生</h3><hr>
+                                 <form class="form-horizontal" action="/admin/index/update" method="post" enctype="multipart/form-data">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="id" value="{{$v->id}}">
+                                <div class="form-group" style="clear:both;">
+                                    <label class="col-sm-2 control-label">当前头像：</label>
+                                    <div class="col-sm-10">
+                                        <img src="/uploads/{{$v->imagex}}">
+                                    </div>
+                                </div>
+                                <div class="form-group" style="clear:both;">
+                                    <label class="col-sm-2 control-label">头像：</label>
+                                    <div class="col-sm-10">
+                                        <a href="javascript:;" class="upload">选择图片
+                                            <input type="file" name="imaged" class="change"  multiple="multiple" id="file">
+                                        </a>
+                                        <div class="fileerrorTip1" style="display:inline-block; "></div>
+                                        <div class="showFileName1" style="display:inline-block;"></div>
+
+                                    </div>
+                                </div>
+                                <div class="form-group" style="clear:both;">
+                                    <label class="col-sm-2 control-label">姓名：</label>
+                                    <div class="col-sm-10">
+                                      <input type="text" class="form-control" placeholder="姓名" name="name" value="{{$v->name}}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">性别：</label>
+                                    <div class="col-sm-10">
+                                        <select name="sex" class="form-control">
+                                            <option value="男" {{$v->sex=='男' ? 'selected' : ' '}} >男</option>
+                                            <option value="女" {{$v->sex=='女' ? 'selected' : ' '}}>女</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">密码：</label>
+                                    <div class="col-sm-10">
+                                      <input type="password" class="form-control" placeholder="密码" name="password" value="{{$v->password}}">
+                                    </div>
+                                </div>
+                                <div>
+                                    <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" id="file_id"><strong>修改</strong>
+                                    </button>
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         @endforeach
         <!--右侧部分开始-->
         <div id="page-wrapper" class="gray-bg dashbard-1">
             <div class="row border-bottom">
@@ -897,8 +985,44 @@
     <script src="/js/hplus.js?v=4.1.0"></script>
     <script type="text/javascript" src="/js/contabs.js"></script>
 
+    <!-- Bootstrap table -->
+    <script src="/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+     <!-- iCheck -->
+    <script src="/js/plugins/iCheck/icheck.min.js"></script>
+    <script src="/laydate/laydate.js"></script>
+
+    <!-- Peity -->
+    <script src="/js/plugins/peity/jquery.peity.min.js"></script>
+
     <!-- 第三方插件 -->
     <script src="/js/plugins/pace/pace.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+
+            //显示文件信息
+            $(".upload").on("change","input[type='file']",function(){
+                var filePath=$(this).val();
+                alert(filePath);
+                if(filePath.indexOf("jpg")!=-1 || filePath.indexOf("png")!=-1 || filePath.indexOf("gif")!=-1){
+                    $(".fileerrorTip1").html("").hide();
+                    var arr=filePath.split('\\');
+                    var fileName=arr[arr.length-1];
+                    $(".showFileName1").html(fileName);
+                }else{
+                    $(".showFileName1").html("");
+                    $(".fileerrorTip1").html("您未上传文件，或者您上传文件类型有误！").show();
+                    return false
+                }
+            })
+        });
+    </script>
 
 </body>
 
