@@ -7,11 +7,13 @@
     </script>
     <div class="banner-box">
         <div class="banner w1200">
-                <ul>
-                    <li><a href="JavaScript:;"><img src="/banner/188761521448108.jpg" /></a></li>
-                    <li><a href="JavaScript:;"><img src="/banner/655211521448133.jpg" /></a></li>
-                    <li><a href="JavaScript:;"><img src="/banner/905211521448140.jpg" /></a></li>
-                    <div style="clear:both;"></div>
+           
+                <ul class="ck-slide-wrapper">
+                     @foreach($stu as $v)
+                     @if($v->state=='启用')
+                        <li><a href="JavaScript:;"><img src="/banner/{{$v->imaged}}" /></a></li>
+                     @endif   
+                    @endforeach 
                 </ul>
                 <a href="JavaScript:;" class="bnr bnr-left">
                     <</a>

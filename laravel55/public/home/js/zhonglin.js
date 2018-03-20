@@ -41,21 +41,22 @@ $(document).ready(function() {
 
 //轮播图
 //自动轮播
+ss = $('.ck-slide-wrapper').find('li').length;
 var index1=0;
-function dd(){
-	if(index1 == 2){
+function sta(){
+	if(index1 == ss-1){
 		index1 = 0;
 	}else{
 		index1++;
 	}
 	$('.banner ul li').eq(index1).fadeIn(500).siblings().fadeOut(600);
 }
-time1 = setInterval(dd,3000);
+time1 = setInterval(sta,3000);
 
 //左箭头的实现
 function fadeLeft(){
 if(index1 == 0){
-  	index1 = 2;
+  	index1 = ss-1;
 }else{
 	index1--;
 }
@@ -76,7 +77,7 @@ $('.bnr-left').click(function(){
 $('.bnr-right').click(function(){
     
     if(yanchi==0){
-		dd();
+		sta();
 		yanchi=1;
 		setTimeout(function(){
 			yanchi=0;
@@ -87,7 +88,7 @@ $('.bnr-right').click(function(){
 $('.banner').hover(function(){
     clearInterval(time1);
 },function(){
-   time1 = setInterval(dd,3000);
+   time1 = setInterval(sta,3000);
 })
 //轮播图 END
 
