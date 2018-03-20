@@ -27,12 +27,12 @@ class GoodsInfo extends Model
 		return $value."件";
     }
 
-    public function setPriceAttribute($value){
-    	 return ltrim(rtrim($value, ".00"),"￥");
-    }
+  //   public function setPriceAttribute($value){
+  //   	 return ltrim(rtrim($value, ".00"),"￥");
+  //   }
 
-    public function setNumberAttribute($value){
+  //   public function setNumberAttribute($value){
 
-		return rtrim($value,"件");
-    }
+		// return rtrim($value,"件");
+  //   }
 }

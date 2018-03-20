@@ -79,13 +79,13 @@
                             <br>
                             
                             <label>设置库存：</label>
-                            <input class="form-control input-outline" type="text" name="number" value="{{$aa->number}}">
+                            <input class="form-control input-outline" type="text" name="number" value="{{$aa->getOriginal('number')}}">
 
                             <br>
                             <br>
                             <br>
                             <label>设置价格：</label>
-                            <input class="form-control input-outline" type="text" name="price" value="{{$aa->price}}">
+                            <input class="form-control input-outline" type="text" name="price" value="{{$aa->getOriginal('price')}}">
                             <br>
                             <br>
                             <br>

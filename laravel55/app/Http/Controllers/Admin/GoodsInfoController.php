@@ -226,7 +226,7 @@ class GoodsInfoController extends Controller
         $data = GoodsInfo::find($id);
         // 获取图片路径
         $src1 = ltrim($data->path.$data->image,'/');
-
+        
         $src2 = ltrim($data->path.'s_'.$data->image,'/');
         
         $goods = GoodsInfo::find($id);
@@ -239,13 +239,14 @@ class GoodsInfoController extends Controller
         if($request->hasFile('image')){
             
             $goods->image = $this->pic($request->image);
+            $goods->path = "/upload/goods/";
             
         }
         $a = $goods->save();
         if($a){
             $txt = "修改成功";
-            if($goods->image != $data->image){
-                 unlink ($src1);
+            if($goods->image != $data->image && $src1 != ''){
+                unlink ($src1);
                 unlink ($src2);
             }
            
