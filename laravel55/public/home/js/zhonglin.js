@@ -40,36 +40,55 @@ $(document).ready(function() {
 	});
 
 //轮播图
-	var tu=0;
-	var spend=1000;
-	/*点击  右侧*/
-	$(".bnr-right").click(function(){
-		dsq();
-	});
-	/*点击  左侧*/
-	$(".bnr-left").click(function(){
-		tu--;
-		if(tu<0){
-			tu=4;
-			$(".banner ul").css("left",-6000);
-		}
-		$(".banner ul").animate({"left":-tu*1200},spend);
-	});
-	/*定时器 开启*/
-	var time=setInterval(dsq,2000);
-	function dsq(){
-		tu++;
-		if(tu>5){
-			tu=1;
-			$(".banner ul").css("left",0);
-		}
-		$(".banner ul").animate({"left":-tu*1200},spend);
+//自动轮播
+var index1=0;
+function dd(){
+	if(index1 == 2){
+		index1 = 0;
+	}else{
+		index1++;
 	}
-	$(".banner").hover(function(){
-		clearInterval(time);	},function(){
-		clearInterval(time);
-		time=setInterval(dsq,2000);
-	});
+	$('.banner ul li').eq(index1).fadeIn(500).siblings().fadeOut(600);
+}
+time1 = setInterval(dd,3000);
+
+//左箭头的实现
+function fadeLeft(){
+if(index1 == 0){
+  	index1 = 2;
+}else{
+	index1--;
+}
+$('.banner ul li').eq(index1).fadeIn(500).siblings().fadeOut(600);
+}
+yanchi=0;
+$('.bnr-left').click(function(){
+	if(yanchi==0){
+		fadeLeft();
+		yanchi=1;
+		setTimeout(function(){
+			yanchi=0;
+		},1000)
+	} 
+})
+
+//右箭头的实现
+$('.bnr-right').click(function(){
+    
+    if(yanchi==0){
+		dd();
+		yanchi=1;
+		setTimeout(function(){
+			yanchi=0;
+		},1000)
+	} 
+})
+//鼠标移入暂停，鼠标移出继续
+$('.banner').hover(function(){
+    clearInterval(time1);
+},function(){
+   time1 = setInterval(dd,3000);
+})
 //轮播图 END
 
 	$("[hover]").hover(function() {

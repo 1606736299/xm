@@ -194,16 +194,11 @@
     </div>
     <!--nav 开始-->
     <div class="nav w1200">
-        <a href="JavaScript:;" class="sp-kj" kj="">
+        <a href="JavaScript:;" class="sp-kj">
             商品分类快捷
             
         </a>
-        <div class="kj-show">
-            <a href="#"><img src="images/kj-tu1.jpg" /></a>
-            <a href="#"><img src="images/kj-tu2.jpg" /></a>
-            <a href="#"><img src="images/kj-tu3.jpg" /></a>
-        </div>
-        <div class="kj-show2 none" kj-sh="">
+        <div class="kj-show2 none" kj-sh="" style="display:block;">
             <div class="kj-info1" mg="shiping">
                 <dl class="kj-dl1">
                     <dt>

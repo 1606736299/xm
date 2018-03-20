@@ -1,19 +1,21 @@
 @include('layouts.nav')
     <!--banner 开始-->
+    <style type="text/css">
+    </style>
+    <script type="text/javascript">
+        
+    </script>
     <div class="banner-box">
         <div class="banner w1200">
-            <ul>
-                <li><a href="JavaScript:;"><img src="http://placehold.it/1200x560/4D99E0/ffffff.png&text=1200x560 1" /></a></li>
-                <li><a href="JavaScript:;"><img src="http://placehold.it/1200x560/4D99E0/ffffff.png&text=1200x560 2" /></a></li>
-                <li><a href="JavaScript:;"><img src="http://placehold.it/1200x560/4D99E0/ffffff.png&text=1200x560 3" /></a></li>
-                <li><a href="JavaScript:;"><img src="http://placehold.it/1200x560/4D99E0/ffffff.png&text=1200x560 4" /></a></li>
-                <li><a href="JavaScript:;"><img src="http://placehold.it/1200x560/4D99E0/ffffff.png&text=1200x560 5" /></a></li>
-                <li><a href="JavaScript:;"><img src="http://placehold.it/1200x560/4D99E0/ffffff.png&text=1200x560 1" /></a></li>
-                <div style="clear:both;"></div>
-            </ul>
-            <a href="JavaScript:;" class="bnr bnr-left">
-                <</a>
-                    <a href="JavaScript:;" class="bnr bnr-right">></a>
+                <ul>
+                    <li><a href="JavaScript:;"><img src="/banner/188761521448108.jpg" /></a></li>
+                    <li><a href="JavaScript:;"><img src="/banner/655211521448133.jpg" /></a></li>
+                    <li><a href="JavaScript:;"><img src="/banner/905211521448140.jpg" /></a></li>
+                    <div style="clear:both;"></div>
+                </ul>
+                <a href="JavaScript:;" class="bnr bnr-left">
+                    <</a>
+                        <a href="JavaScript:;" class="bnr bnr-right">></a>                  
         </div>
     </div>
     <!--广告栏-->

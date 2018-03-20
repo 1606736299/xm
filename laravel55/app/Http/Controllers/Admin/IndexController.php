@@ -9,7 +9,9 @@ use Image;
 class IndexController extends Controller
 {
 	public function index(){
+
 		$sess = session('key');
+
 		$ccc = Adminuser::where('username',$sess)->get();
 
 		 return view('admin.index',['ccc'=>$ccc]);
@@ -89,7 +91,7 @@ class IndexController extends Controller
 	//执行退出清楚session
 	public function exit(Request $request){
 
-		$request->session()->forget('key');
+		$request->session()->forget('key');//清楚session
 
 		return redirect()->route('login');
 	}

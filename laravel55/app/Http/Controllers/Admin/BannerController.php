@@ -207,7 +207,7 @@ class BannerController extends Controller
             $Banner = Banner::find($tmpArr[$i]);
 
             //定义图片路径
-            $file = "uploads/";
+            $file = "banner/";
 
             //查询原图片
             $ximage =  $Banner->imagex;

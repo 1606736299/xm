@@ -17,7 +17,7 @@ class LoginController extends Controller
 				return "登陆成功";
 			}
 		}
-		return "用户名或密码有误，请重新输入或<a href='#' style='color:#2e82fff'>找回密码</a>";
+		return "用户名或密码有误，请重新输入！";
 	}
 }
 
