@@ -33,6 +33,22 @@ Route::group(['middleware' => 'adminlogin'],function(){
 	//前台会员控制器
 	Route::any('/admin/user','Admin\UserController@index');
 	Route::any('/admin/user/state/{id}','Admin\UserController@state');//修改状态
+
+
+
+
+
+
+	//产品信息的资源管理器
+	Route::resource('/admin/goods', 'Admin\GoodsController');
+	Route::resource('/admin/goodsinfo', 'Admin\GoodsInfoController');
+	// 产品添加信息
+	Route::get('/admin/goods/add/{sid?}', 'Admin\GoodsController@add');
+	// 删除产品信息
+	Route::get('/admin/goods/{id}/del','Admin\GoodsController@del');
+
+	// 删除产品规格
+	Route::get('/admin/goodsinfo/{id}/del','Admin\GoodsInfoController@del');
 }); 
 
 
