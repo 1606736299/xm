@@ -16,7 +16,15 @@
         <div class="top-con w1200">
             <p class="t-con-l f-l">您好，欢迎来到宅客微购</p>
             <ul class="t-con-r f-r">
-                <li><a href="#">我 (个人中心)</a></li>
+                @if($ccc)
+                <li><a href="#">你好，{{$ccc}}</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="/home/login/logout">退出</a>
+                </li>
+                @else
+                <li><a href="/login">你好，请先登陆</a></li>
+                @endif
+                <li><a href="#">免费注册</a></li>
                 <li><a href="#">我的购物车</a></li>
                 <li><a href="#">我的订单</a></li>
                 <li class="erweima">
@@ -36,12 +44,6 @@
             <h1><a href="#" title="中林网站"><img src="home/images/logo.jpg" /></a></h1>
         </div>
         <div class="dianji f-r">
-            <div class="btn1">
-                <button class="btn1-l">注册</button>
-                <button class="btn1-r">登录</button>
-                <div style="clear:both;"></div>
-            </div>
-            <button class="btn2">商家入口 ></button>
         </div>
         <div class="search f-r">
             <ul class="sp">

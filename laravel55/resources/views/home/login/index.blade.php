@@ -1,56 +1,174 @@
-
 <!DOCTYPE html>
-<html lang="zh-CN">
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
-
-    <title>登陆</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="http://v3.bootcss.com/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="http://v3.bootcss.com/examples/signin/signin.css" rel="stylesheet">
-
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>登录</title>
+<link rel="stylesheet" type="text/css" href="/home/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/home/css/shopping-mall-index.css" />
+<script type="text/javascript" src="/home/js/jquery.js"></script>
+<script type="text/javascript" src="/home/js/zhonglin.js"></script>
 </head>
 
 <body>
 
-<div class="container">
+	<div class="sign-logo w1200">
+	<h1><a href="#" title="宅客微购"><img src="/home/images/logo.jpg" /></a></h1>
+</div>
 
-    <form class="form-signin" method="POST" action="/login">
-        {{ csrf_field() }}
-        <h2 class="form-signin-heading">请登录</h2>
-        <label for="inputEmail" class="sr-only">邮箱</label>
-        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">密码</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" value="1" name="is_remember"> 记住我
-            </label>
+	<div class="sign-con w1200">
+	<img src="/home/images/logn-tu.gif" class="sign-contu f-l" />
+
+    <div class="sign-ipt f-l">
+        <p style="margin-top:-20px;text-align: center;">用户名密码登陆</p>
+        <p style="height:20px; color:#fc4343; font-size:12px;" id="cuowu"></p>
+        <input type="text" placeholder="手机号/用户名" name="username" id="username" style="margin-bottom:20px;"/>
+        <input type="password" placeholder="密码" name="password" id="password" style="margin-bottom:20px;"/><br />
+        <input type="text" placeholder="验证码" name="captcha" id="captcha" style="width:100px; float:left;"/><img src="{{captcha_src()}}" onclick="this.src='{{captcha_src()}}?'+Math.random()" alt="" style="vertical-align:bottom;float:left;height: 35px;width: 113px; margin-left:50px;"/>
+        <button class="slig-btn" type="submit" id="submit">登录</button>
+        <p><a href="#">立即注册</a><a href="#" class="wj">忘记密码？</a></p>
+        
+    </div>
+    <div style="clear:both;"></div>
+</div>
+
+    <!--底部服务-->
+    <div class="ft-service">
+    	<div class="w1200">
+        	<div class="sv-con-l2 f-l">
+            	<dl>
+                	<dt><a href="#">新手上路</a></dt>
+                    <dd>
+                    	<a href="#">购物流程</a>
+                    	<a href="#">在线支付</a>
+                    </dd>
+                </dl>
+                <dl>
+                	<dt><a href="#">配送方式</a></dt>
+                    <dd>
+                    	<a href="#">货到付款区域</a>
+                    	<a href="#">配送费标准</a>
+                    </dd>
+                </dl>
+                <dl>
+                	<dt><a href="#">购物指南</a></dt>
+                    <dd>
+                    	<a href="#">常见问题</a>
+                    	<a href="#">订购流程</a>
+                    </dd>
+                </dl>
+                <dl>
+                	<dt><a href="#">售后服务</a></dt>
+                    <dd>
+                    	<a href="#">售后服务保障</a>
+                    	<a href="#">退款说明</a>
+                    	<a href="#">新手选购商品总则</a>
+                    </dd>
+                </dl>
+                <dl>
+                	<dt><a href="#">关于我们</a></dt>
+                    <dd>
+                    	<a href="#">投诉与建议</a>
+                    </dd>
+                </dl>
+                <div style="clear:both;"></div>
+            </div>
+        	<div class="sv-con-r2 f-r">
+            	<p class="sv-r-tle">187-8660-5539</p>
+            	<p>周一至周五9:00-17:30</p>
+            	<p>（仅收市话费）</p>
+            	<a href="#" class="zxkf">24小时在线客服</a>
+            </div>
+            <div style="clear:both;"></div>
         </div>
-        @include('layouts.error')
-        <button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
-        <a href="/register" class="btn btn-lg btn-primary btn-block" type="submit">去注册>></a>
-    </form>
-
-</div> <!-- /container -->
-
+    </div>
+    
+    <!--底部 版权-->
+    <div class="footer w1200">
+    	<p>
+        	<a href="#">关于我们</a><span>|</span>
+        	<a href="#">友情链接</a><span>|</span>
+        	<a href="#">宅客微购社区</a><span>|</span>
+        	<a href="#">诚征英才</a><span>|</span>
+        	<a href="#">商家登录</a><span>|</span>
+        	<a href="#">供应商登录</a><span>|</span>
+        	<a href="#">热门搜索</a><span>|</span>
+        	<a href="#">宅客微购新品</a><span>|</span>
+        	<a href="#">开放平台</a>
+        </p>
+        <p>
+        	沪ICP备13044278号<span>|</span>合字B1.B2-20130004<span>|</span>营业执照<span>|</span>互联网药品信息服务资格证<span>|</span>互联网药品交易服务资格证
+        </p>
+    </div>
+    
 </body>
+<script type="text/javascript">
+    $(function(){
+        $('#password').focus(function(){
+            if($('#username').val() &&  $('#cuowu').html()=='请输入用户名'){
+                $('#username').css('border','1px solid #ccc');
+                $('#cuowu').html(' ');
+            }    
+        });
+        $('#captcha').focus(function(){
+            if($('#password').val() &&  $('#cuowu').html()=='请输入密码'){
+                $('#password').css('border','1px solid #ccc');
+                $('#cuowu').html(' ');
+            }    
+        });
+        $('#submit').click(function(){
+            // alert(1);
+            reg =  /\S/;
+            username = $('#username').val();//获取username值
+            password = $('#password').val();//获取密码
+            captcha = $('#captcha').val();//获取验证码
+            if(!reg.test(username)){
+                 $('#cuowu').html('请输入用户名');
+                 $('#password').css('border','1px solid #ccc');
+                 $('#captcha').css('border','1px solid #ccc');
+                 $('#username').css('border','1px solid red');
+                 return false;
+            }
+            if(!reg.test(password)){
+                $('#cuowu').html('请输入密码');
+                $('#username').css('border','1px solid #ccc');
+                $('#captcha').css('border','1px solid #ccc');
+                $('#password').css('border','1px solid red');
+                return false;
+            }
+            if(!reg.test(captcha)){
+                 $('#cuowu').html('请输入验证码');
+                 $('#password').css('border','1px solid #ccc');
+                 $('#captcha').css('border','1px solid red');
+                 $('#username').css('border','1px solid #ccc');
+                 return false;
+            }
+
+             $.ajax({
+                url: "/home/login/login",
+                type:"post",     //请求类型
+                data:{
+                    username:username,
+                    password:password,
+                    captcha:captcha,
+                    "_token":"{{ csrf_token() }}",
+                    }, 
+                success: function(data){
+                //laravel返回的数据是不经过这里的
+                    if(data=='登陆成功'){
+                        location.href="/";
+                    }else{
+                        $('#cuowu').html(data);
+                    }
+                },
+                error: function(msg) {
+                    var json=JSON.parse(msg.responseText);
+                    $('#cuowu').html(json.errors.captcha);
+                },
+                }) 
+               
+            return false;
+           
+        });
+    });
+</script>
 </html>

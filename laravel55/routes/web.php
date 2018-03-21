@@ -149,8 +149,14 @@ Route::group(['middleware' => 'adminlogin'],function(){
 
 
 // -----------------首页------------------//
+//首页
+Route::any('/', 'Home\IndexController@index')->name('index');;
 //登陆
-Route::any('/', 'Home\IndexController@index');
+Route::any('/login', 'Home\LoginController@index');
+//登陆验证
+Route::any('/home/login/login', 'Home\LoginController@login');
+//退处
+Route::any('/home/login/logout', 'Home\LoginController@logout');
 //用户模块
 //注册页面
 Route::get('/register', 'Home\RegisterController@index');
