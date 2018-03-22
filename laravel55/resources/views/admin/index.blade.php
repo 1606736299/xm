@@ -290,6 +290,8 @@
                     <li>
                         <a href="#"><i class="fa fa-hand-peace-o"></i> <span class="nav-label">评价管理</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
+                            <li><a class="J_menuItem" href="/admin/comment">评论</a>
+                            </li>
                             <li><a class="J_menuItem" href="typography.html">排版</a>
                             </li>
                             <li>

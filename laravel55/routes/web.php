@@ -49,6 +49,18 @@ Route::group(['middleware' => 'adminlogin'],function(){
 
 	// 删除产品规格
 	Route::get('/admin/goodsinfo/{id}/del','Admin\GoodsInfoController@del');
+
+
+	// 加载评论列表
+	Route::get('/admin/comment','Admin\CommentController@index');
+	// 加载回复
+	Route::get('/admin/comment/{id}/edit','Admin\CommentController@edit');
+	//回复 
+	Route::put('/admin/comment/{id}','Admin\CommentController@update');
+	//状态
+	Route::get('/admin/comment/{id}/del','Admin\CommentController@show');
+	//查看指定 评论
+	Route::get('/admin/comment/{id}','Admin\CommentController@sep');
 }); 
 
 
