@@ -52,15 +52,15 @@
     	<div class="psw psw3">
         	<p class="psw-p1">验证码</p>
             <input type="text" placeholder="请输入验证码" />
-            <img src="{{captcha_src()}}" onclick="this.src='{{captcha_src()}}?'+Math.random()" alt="" style="vertical-align:bottom;display:inline-block; text-align:left; height: 35px;width: 113px; margin-left:40px;"/>
+            <img src="{{captcha_src()}}" onclick="this.src='{{captcha_src()}}?'+Math.random()" alt="" style="vertical-align:bottom;display:inline-block; text-align:left; height: 35px;width: 113px; margin-left:41px;"/>
             <span class="yanzheng"></span>
         </div>
-        <div class="agreement" style="margin-left:30px;">
-        	<input type="checkbox" name="hobby"></input>
+        <div class="agreement" style="margin-left:15px;">
+        	<input type="checkbox" name="hobby" checked="checked"></input>
             <p>我有阅读并同意<span>《宅客微购网站服务协议》</span></p>
         </div>
-        <button class="psw-btn">立即注册</button>
-        <p class="sign-in">已有账号？请<a href="#">登录</a></p>
+        <button class="psw-btn" id="submit" style="margin-left:63px;">立即注册</button>
+        <p class="sign-in" style="margin-left:-169px;">已有账号？请<a href="#">登录</a></p>
     </div>
     
     <!--底部服务-->
@@ -133,4 +133,19 @@
     </div>
     
 </body>
+<script type="text/javascript">
+    $(function(){
+         $("#submit").on('click',function(){
+
+          if($("input[type='checkbox']").is(':checked')){
+            alert('选中了');
+            return false;
+          }{
+            alert('没有选中');
+          }
+           
+            
+         });
+    });
+</script>
 </html>
